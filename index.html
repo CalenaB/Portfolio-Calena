@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Front-End Developer</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -21,20 +22,21 @@
         }
 
         body::before {
-            content:"";
-            position:fixed;
-            width:200%;
-            height:200%;
-            top:-50%;
-            left:-50%;
-            background:url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
-            opacity:0.3;
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            opacity: 0.3;
             animation: spaceMove 40s infinite linear;
+            z-index: -1;
         }
 
         @keyframes spaceMove {
-            from{transform:translate(0,0);}
-            to{transform:translate(500px,500px);}
+            from { transform: translate(0,0); }
+            to { transform: translate(500px,500px); }
         }
 
         header {
@@ -57,6 +59,8 @@
             text-shadow: 0 0 10px #00d4ff;
         }
 
+        /* ===================== CAROUSEL ===================== */
+
         .carousel {
             width: 80%;
             margin: 60px auto;
@@ -69,18 +73,6 @@
             backdrop-filter: blur(10px);
         }
 
-        .carousel img {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .carousel img.active {
-            display: block;
-        }
-
         .carousel a {
             display: none;
         }
@@ -90,32 +82,57 @@
         }
 
         .carousel img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
             cursor: pointer;
+            transition: 0.3s ease;
         }
 
+        .carousel img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px #ff2e8a;
+        }
+
+        /* ===================== BUTTONS ===================== */
+
         .btn {
-            position:absolute;
-            top:50%;
-            transform:translateY(-50%);
-            font-size:2rem;
-            cursor:pointer;
-            padding:5px 15px;
-            color:#fff;
-            text-shadow:0 0 10px #00d4ff;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 5px 15px;
+            color: #fff;
+            text-shadow: 0 0 10px #00d4ff;
+            user-select: none;
         }
 
         .btn:hover {
-            color:#ff2e8a;
-            text-shadow:0 0 20px #ff2e8a;
+            color: #ff2e8a;
+            text-shadow: 0 0 20px #ff2e8a;
         }
 
-        #prev { left:15px; }
-        #next { right:15px; }
+        #prev { left: 15px; }
+        #next { right: 15px; }
 
         footer {
-            text-align:center;
-            padding:40px 10%;
-            color:#aaa;
+            text-align: center;
+            padding: 40px 10%;
+            color: #aaa;
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .carousel img {
+                height: 260px;
+            }
         }
     </style>
 </head>
@@ -127,46 +144,48 @@
         <p class="subtitle">HTML | CSS | JavaScript</p>
     </header>
 
-<div class="carousel">
-    <span id="prev" class="btn">&#10094;</span>
-    <span id="next" class="btn">&#10095;</span>
+    <div class="carousel">
+        <span id="prev" class="btn">&#10094;</span>
+        <span id="next" class="btn">&#10095;</span>
 
-    <a href="https://articali-magical-tales.vercel.app/" target="_blank">
-        <img class="active" src="./images/articali site.png" alt="Articali">
-    </a>
+        <a href="https://articali-magical-tales.vercel.app/" target="_blank" class="active">
+            <img src="./images/articali site.png" alt="Projeto Articali">
+        </a>
 
-    <a href="https://projeto2-agenda-de-contatos-lime.vercel.app/" target="_blank">
-        <img src="./images/Agenda de contatos.png" alt="Agenda de Contatos">
-    </a>
+        <a href="https://projeto2-agenda-de-contatos-lime.vercel.app/" target="_blank">
+            <img src="./images/Agenda de contatos.png" alt="Agenda de Contatos">
+        </a>
 
-    <a href="https://seu-link-lista-tarefas.vercel.app/" target="_blank">
-        <img src="./images/lista de tarefas.png" alt="Lista de Tarefas">
-    </a>
-</div>
+        <a href="https://seu-link-lista-tarefas.vercel.app/" target="_blank">
+            <img src="./images/lista de tarefas.png" alt="Lista de Tarefas">
+        </a>
+    </div>
 
-    <footer>© 2025 — Todos os direitos reservados</footer>
+    <footer>
+        © 2025 — Todos os direitos reservados
+    </footer>
 
     <script>
-    const slides = document.querySelectorAll(".carousel a");
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
+        const slides = document.querySelectorAll(".carousel a");
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
 
-    let index = 0;
+        let index = 0;
 
-    function showImage(i){
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[i].classList.add("active");
-    }
+        function showSlide(i) {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slides[i].classList.add("active");
+        }
 
-    next.onclick = () => {
-        index = (index + 1) % slides.length;
-        showImage(index);
-    };
+        next.addEventListener("click", () => {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        });
 
-    prev.onclick = () => {
-        index = (index - 1 + slides.length) % slides.length;
-        showImage(index);
-    };
+        prev.addEventListener("click", () => {
+            index = (index - 1 + slides.length) % slides.length;
+            showSlide(index);
+        });
     </script>
 
 </body>
