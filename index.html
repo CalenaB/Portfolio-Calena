@@ -81,6 +81,18 @@
             display: block;
         }
 
+        .carousel a {
+            display: none;
+        }
+
+        .carousel a.active {
+            display: block;
+        }
+
+        .carousel img {
+            cursor: pointer;
+        }
+
         .btn {
             position:absolute;
             top:50%;
@@ -115,38 +127,46 @@
         <p class="subtitle">HTML | CSS | JavaScript</p>
     </header>
 
-    <div class="carousel">
-        <span id="prev" class="btn">&#10094;</span>
-        <span id="next" class="btn">&#10095;</span>
+<div class="carousel">
+    <span id="prev" class="btn">&#10094;</span>
+    <span id="next" class="btn">&#10095;</span>
 
-        <img class="active" src="./images/articali site.png">
-        <img src="./images/Agenda de contatos.png">
-        <img src="./images/lista de tarefas.png">
-    </div>
+    <a href="https://articali-magical-tales.vercel.app/" target="_blank">
+        <img class="active" src="./images/articali site.png" alt="Articali">
+    </a>
+
+    <a href="https://projeto2-agenda-de-contatos-lime.vercel.app/" target="_blank">
+        <img src="./images/Agenda de contatos.png" alt="Agenda de Contatos">
+    </a>
+
+    <a href="https://seu-link-lista-tarefas.vercel.app/" target="_blank">
+        <img src="./images/lista de tarefas.png" alt="Lista de Tarefas">
+    </a>
+</div>
 
     <footer>© 2025 — Todos os direitos reservados</footer>
 
     <script>
-        const images = document.querySelectorAll(".carousel img");
-        const prev = document.getElementById("prev");
-        const next = document.getElementById("next");
+    const slides = document.querySelectorAll(".carousel a");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
 
-        let index = 0;
+    let index = 0;
 
-        function showImage(i){
-            images.forEach(img => img.classList.remove("active"));
-            images[i].classList.add("active");
-        }
+    function showImage(i){
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[i].classList.add("active");
+    }
 
-        next.onclick = () => {
-            index = (index + 1) % images.length;
-            showImage(index);
-        };
+    next.onclick = () => {
+        index = (index + 1) % slides.length;
+        showImage(index);
+    };
 
-        prev.onclick = () => {
-            index = (index - 1 + images.length) % images.length;
-            showImage(index);
-        };
+    prev.onclick = () => {
+        index = (index - 1 + slides.length) % slides.length;
+        showImage(index);
+    };
     </script>
 
 </body>
